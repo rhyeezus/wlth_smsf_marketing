@@ -1,15 +1,25 @@
 <template>
   <div class="flex flex-col lg:min-h-[28rem]">
 
+    <!-- Step question heading — above the tracker -->
+    <h3 v-if="isQuizStep" class="text-xl font-semibold text-white mb-3 font-sans">{{ stepHeading }}</h3>
+
+    <!-- Progress stepper -->
+    <div v-if="isQuizStep" class="flex items-center gap-3 mb-5">
+      <span class="text-sm font-semibold shrink-0" style="color: #05E6DD">Step {{ stepNumber }} of 5</span>
+      <div class="flex-1 h-3 bg-white/20 rounded-full overflow-hidden">
+        <div
+          class="progress-fill h-full rounded-full transition-all duration-500"
+          :style="{ width: `${(stepNumber / 5) * 100}%` }"
+        />
+      </div>
+    </div>
+
     <Transition name="step" mode="out-in">
       <div :key="step">
 
         <!-- Q1: SMSF Balance -->
         <div v-if="step === 'q1'">
-          <h3 class="text-xl font-semibold text-white mb-2 font-sans">
-            What is the approximate balance of your SMSF?
-          </h3>
-          <p class="text-white/70 text-sm mb-6">Select the range that best applies.</p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               v-for="opt in q1Options"
@@ -24,10 +34,6 @@
 
         <!-- Q2: Loan Amount -->
         <div v-else-if="step === 'q2'">
-          <h3 class="text-xl font-semibold text-white mb-2 font-sans">
-            What is the approximate loan amount on your SMSF property?
-          </h3>
-          <p class="text-white/70 text-sm mb-6">Select the range that best applies.</p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               v-for="opt in q2Options"
@@ -50,10 +56,6 @@
 
         <!-- Q4: Loan Type -->
         <div v-else-if="step === 'q4'">
-          <h3 class="text-xl font-semibold text-white mb-2 font-sans">
-            Is your current SMSF loan fixed or variable?
-          </h3>
-          <p class="text-white/70 text-sm mb-6">Select the option that applies.</p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
               v-for="opt in q4Options"
@@ -68,10 +70,6 @@
 
         <!-- Q5: Last Review -->
         <div v-else-if="step === 'q5'">
-          <h3 class="text-xl font-semibold text-white mb-2 font-sans">
-            When was the last time your SMSF loan was reviewed?
-          </h3>
-          <p class="text-white/70 text-sm mb-6">Select the option that best applies.</p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               v-for="opt in q5Options"
@@ -196,19 +194,6 @@
       </div>
     </Transition>
 
-    <!-- Progress bar — pinned to bottom; mt-auto fills remaining space when card is fixed min-height -->
-    <div v-if="isQuizStep" class="mt-auto pt-8">
-      <div class="flex justify-between text-sm text-white/60 mb-2">
-        <span>Step {{ stepNumber }} of 5</span>
-        <span>{{ Math.round((stepNumber / 5) * 100) }}%</span>
-      </div>
-      <div class="h-3 bg-white/20 rounded-full overflow-hidden">
-        <div
-          class="progress-fill h-full bg-royalblue-500 rounded-full transition-all duration-500"
-          :style="{ width: `${(stepNumber / 5) * 100}%` }"
-        />
-      </div>
-    </div>
 
   </div>
 </template>
@@ -232,6 +217,15 @@ const answers = reactive({
 
 const stepOrder: Step[] = ['q1', 'q2', 'q3', 'q4', 'q5', 'lead', 'result']
 const stepNumberMap: Record<string, number> = { q1: 1, q2: 2, q3: 3, q4: 4, q5: 5 }
+
+const stepHeadings: Record<string, string> = {
+  q1: 'What is the approximate balance of your SMSF?',
+  q2: 'What is the approximate loan amount on your SMSF property?',
+  q3: 'What is your current SMSF loan interest rate?',
+  q4: 'Is your current SMSF loan fixed or variable?',
+  q5: 'When was the last time your SMSF loan was reviewed?',
+}
+const stepHeading = computed(() => stepHeadings[step.value] ?? '')
 
 const isQuizStep = computed(() => ['q1', 'q2', 'q3', 'q4', 'q5'].includes(step.value))
 const stepNumber = computed(() => stepNumberMap[step.value] ?? 0)
@@ -384,6 +378,7 @@ async function submitLead() {
 
 /* Progress bar glow */
 .progress-fill {
+  background: #05E6DD;
   box-shadow: 0 0 8px rgba(5, 230, 221, 0.4);
 }
 </style>

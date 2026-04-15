@@ -1,9 +1,5 @@
 <template>
   <div>
-    <h3 class="text-xl font-semibold text-white mb-2 font-sans">
-      What is your current SMSF loan interest rate?
-    </h3>
-    <p class="text-white/70 text-sm mb-6">Select the range that best applies.</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <button
         v-for="opt in options"

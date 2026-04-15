@@ -1,9 +1,9 @@
 <template>
   <section class="hero-section lg:grid lg:grid-cols-12 lg:h-[calc(100vh-4rem)]" style="background: linear-gradient(176deg, #023CB6 6.13%, #0A2364 112.2%)">
 
-    <!-- Left col: video (7/12 on desktop) -->
-    <div class="lg:col-span-7 lg:flex lg:items-stretch lg:py-6 lg:pl-6 lg:pr-3 px-3 py-6">
-      <div class="relative rounded-2xl shadow-xl overflow-hidden w-full h-[45vh] lg:h-full">
+    <!-- Left col: video + mobile copy card (snap panel 1) -->
+    <div class="flex flex-col h-[calc(100vh-4rem)] lg:h-auto lg:col-span-7 lg:flex lg:items-stretch lg:py-6 lg:pl-6 lg:pr-3 px-3 pt-6 pb-6">
+      <div class="relative rounded-2xl shadow-xl overflow-hidden w-full flex-1 lg:flex-none lg:h-full">
         <video
           autoplay
           muted
@@ -25,41 +25,74 @@
           </h1>
         </div>
       </div>
+
+      <!-- Mobile copy card — lives inside panel 1, hidden on desktop -->
+      <div class="copy-card flex flex-col gap-3 rounded-2xl p-6 mt-3 lg:hidden">
+        <div class="grid grid-cols-3 items-center gap-3">
+          <p class="col-span-2 text-xl font-bold text-white leading-tight">
+            Find out, with our<br><span style="color: #05E6DD">SMSF health check</span>
+          </p>
+          <div class="flex flex-col items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-1 w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-2 w-7 h-7 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-3 w-7 h-7 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Right col: copy + form (5/12 on desktop) -->
-    <div class="right-col lg:col-span-5 lg:flex lg:flex-col">
-      <div class="flex flex-col gap-3 lg:gap-4 px-3 pt-6 pb-3 lg:py-6 lg:pr-6 lg:pl-3 lg:flex-1">
+    <div class="right-col min-h-[calc(100vh-4rem)] lg:min-h-0 lg:col-span-5 lg:flex lg:flex-col">
+      <div class="flex flex-col gap-3 lg:gap-4 px-3 pt-6 pb-6 lg:py-6 lg:pr-6 lg:pl-3 lg:flex-1">
 
-        <!-- Glass card: headline + tagline -->
-        <div ref="desktopHeadline" class="right-card flex flex-col gap-3 lg:gap-4 rounded-2xl p-6 lg:p-10">
+        <!-- Merged copy card: desktop only (mobile version lives inside the video col) -->
+        <div ref="desktopHeadline" class="copy-card hidden lg:flex rounded-2xl p-6 lg:p-8 flex-col gap-4">
+          <!-- Desktop-only headline -->
           <h1 class="hidden lg:block text-3xl lg:text-4xl xl:text-5xl font-extralight font-sans text-white leading-[1.1] tracking-[-0.02em]">
             Are you <span class="font-normal" style="color: #05E6DD">Overpaying</span> your<br>SMSF property loan?
           </h1>
-          <p ref="supportCopy" class="smsf-sub text-base lg:text-lg font-light leading-[1.5]">Take our <span style="color: #05E6DD">SMSF Loan Health Check</span>.</p>
+
+          <!-- 3-col: headline (2 cols) + chevron (1 col) -->
+          <div class="grid grid-cols-3 items-center gap-3">
+            <p ref="supportCopy" class="col-span-2 text-xl lg:text-2xl font-bold text-white leading-tight">
+              Find out, with our<br><span style="color: #05E6DD">SMSF health check</span>
+            </p>
+            <div class="flex flex-col items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-1 w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-2 w-7 h-7 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-3 w-7 h-7 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Badge spans full card width -->
+          <!-- <span class="badge-pill self-start">Takes 60 seconds, Get an instant result</span> -->
         </div>
 
-        <!-- Sub-card: supporting prose -->
-        <div ref="badges" class="sub-card rounded-2xl p-6 lg:p-10">
-          <p class="smsf-sub text-base lg:text-xl font-light leading-[1.5]">5 quick questions to see if your loan is still competitive. Take 60 seconds to get instant results — no documents required.</p>
-        </div>
-
-        <!-- Quiz prompt -->
-        <p class="quiz-prompt flex items-center gap-2 text-sm font-medium">
-          Take the quiz now
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </p>
+        <!-- Form snap panel (scroll-snap target on mobile) -->
+        <div class="mobile-snap-target">
 
         <!-- Loan form -->
         <LoanCheck class="border border-white/20 rounded-2xl p-6 lg:p-8" />
 
         <!-- Trust signal -->
-        <p class="text-xs text-white/40 text-center">Trusted by Australian SMSF Trustees · 4.8★ Google Reviews</p>
+        <p class="text-xs text-white/40 text-center mt-3">Trusted by Australian SMSF Trustees · 4.8★ Google Reviews</p>
 
-        <!-- Learn more CTA -->
-        <a href="#learn-more" class="learn-more-cta flex items-center justify-center gap-1.5 w-full text-sm font-medium transition-all rounded-full px-5 py-2.5 mt-3 lg:mt-auto">
+        </div><!-- /mobile-snap-target -->
+
+        <!-- Learn more CTA — desktop only (mobile is in snap container) -->
+        <a href="#learn-more" class="learn-more-cta hidden lg:flex items-center justify-center gap-1.5 w-full text-sm font-medium transition-all rounded-full px-5 py-2.5 lg:mt-auto">
           Learn more
           <svg xmlns="http://www.w3.org/2000/svg" class="learn-more-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -79,14 +112,12 @@ import { gsap } from 'gsap'
 const headline = ref<HTMLElement | null>(null)
 const desktopHeadline = ref<HTMLElement | null>(null)
 const supportCopy = ref<HTMLElement | null>(null)
-const badges = ref<HTMLElement | null>(null)
 
 onMounted(() => {
   const targets = [
     headline.value,
     desktopHeadline.value,
     supportCopy.value,
-    badges.value,
   ].filter(Boolean)
 
   gsap.from(targets, {
@@ -100,25 +131,47 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Mobile scroll snap — section is the container, form is the target */
+@media (max-width: 1023px) {
+  .hero-section {
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    scroll-snap-type: y proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mobile-snap-target {
+    scroll-snap-align: start;
+  }
+}
+
 /* Right column — transparent so the hero blue gradient shows through on all sizes */
 .right-col {
   background: transparent;
 }
 
-/* Glass cards — same on mobile and desktop */
-.right-card {
-  background: linear-gradient(198deg, rgba(61, 67, 82, 0.52) 0%, rgba(41, 46, 58, 0.52) 100%);
-  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(6px);
-}
-.sub-card {
-  background: linear-gradient(198deg, rgba(61, 67, 82, 0.26) 0%, rgba(41, 46, 58, 0.26) 100%);
-  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(6px);
+/* Merged copy card — teal left-border accent, no shadow */
+.copy-card {
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.smsf-sub {
-  color: rgba(255, 255, 255, 0.7);
+/* "60 seconds" badge pill */
+@keyframes badge-pulse {
+  0%, 100% { background: rgba(5, 230, 221, 0.10); }
+  50%       { background: rgba(5, 230, 221, 0.22); }
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  background: rgba(5, 230, 221, 0.12);
+  color: #05E6DD;
+  border: 1px solid rgba(5, 230, 221, 0.25);
+  animation: badge-pulse 2.8s ease-in-out infinite;
 }
 
 /* Teal CTA — same on mobile and desktop */
@@ -131,16 +184,20 @@ onMounted(() => {
   background: #04cfc7;
 }
 
-@keyframes nudge-right {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(4px); }
+@keyframes chev-flow {
+  0%   { opacity: 0.2;  transform: translateY(-1px); }
+  40%  { opacity: 0.8;  transform: translateY(2px);  }
+  80%  { opacity: 0.2;  transform: translateY(5px);  }
+  100% { opacity: 0.2;  transform: translateY(-1px); }
 }
-.quiz-prompt {
-  color: #05E6DD;
+
+.chev {
+  color: rgba(5, 230, 221, 0.85);
+  animation: chev-flow 2s ease-in-out infinite;
 }
-.quiz-prompt svg {
-  animation: nudge-right 1.8s ease-in-out infinite;
-}
+.chev-1 { animation-delay: 0s; }
+.chev-2 { animation-delay: 0.28s; }
+.chev-3 { animation-delay: 0.56s; }
 
 @keyframes bounce-down {
   0%, 100% { transform: translateY(0); }
