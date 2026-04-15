@@ -1,0 +1,8 @@
+node_modules
+.nuxt
+.output
+.env
+dist
+# Large video source files — use /public/video/ for compressed web-ready assets only
+*.mov
+public/images/*.mp4
