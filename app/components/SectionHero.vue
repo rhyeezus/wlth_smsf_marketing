@@ -17,61 +17,41 @@
         </video>
 
         <div class="absolute inset-0 z-10" style="background: linear-gradient(46deg, var(--color-brand-dblue, #292E3A) 8.32%, rgba(122, 136, 144, 0.00) 63.56%)" />
-
-        <!-- Mobile-only overlay headline — hidden on desktop -->
-        <div class="absolute bottom-3 left-3 right-3 z-20 rounded-xl p-6 lg:hidden" style="background: rgba(10, 35, 100, 0.22); box-shadow: 4px 4px 18px rgba(0,0,0,0.18); backdrop-filter: blur(2px);">
-          <h1 ref="headline" class="text-4xl font-extralight font-sans text-white leading-[1.1] tracking-[-0.02em]">
-            Are you<br><span class="font-normal" style="color: #05E6DD">Overpaying</span><br>your SMSF<br>property loan?
-          </h1>
-        </div>
       </div>
     </div>
 
-    <!-- Right col: SMSF copy + badges + form (5/12 on desktop) -->
+    <!-- Right col: copy + form (5/12 on desktop) -->
     <div class="right-col lg:col-span-5 lg:flex lg:flex-col">
       <div class="flex flex-col gap-3 lg:gap-4 px-3 pt-6 pb-3 lg:py-6 lg:pr-6 lg:pl-3 lg:flex-1">
 
-        <!-- Unified glass card (desktop) wrapping all right-col content -->
-        <div class="right-card lg:flex lg:flex-col lg:gap-4 lg:rounded-2xl lg:p-10 flex flex-col gap-3">
-
-          <!-- Desktop-only main headline — hidden on mobile -->
-          <div ref="desktopHeadline" class="hidden lg:block">
-            <h1 class="text-4xl xl:text-5xl font-extralight font-sans text-white leading-[1.1] tracking-[-0.02em]">
-              Are you <span class="font-normal" style="color: #05E6DD">Overpaying</span> your<br>SMSF property loan?
-            </h1>
-          </div>
-
-          <!-- SMSF copy -->
-          <div ref="supportCopy">
-            <!-- Mobile only: big heading + subtext -->
-            <p class="smsf-heading lg:hidden text-3xl font-extralight font-sans leading-[1.1] tracking-[-0.02em]">Take our <span style="color: #05E6DD" class="font-normal">SMSF Loan<br>Health Check</span></p>
-            <p class="smsf-sub lg:hidden text-base font-light leading-[1.4] mt-1">5 quick questions to see if your loan is still competitive.</p>
-            <!-- Desktop only: just the label line -->
-            <p class="smsf-sub hidden lg:block text-lg font-light leading-[1.5]">Take our <span style="color: #05E6DD">SMSF Loan Health Check</span>.</p>
-          </div>
-
+        <!-- Glass card: headline + tagline -->
+        <div ref="desktopHeadline" class="right-card flex flex-col gap-3 lg:gap-4 rounded-2xl p-6 lg:p-10">
+          <h1 class="text-3xl lg:text-4xl xl:text-5xl font-extralight font-sans text-white leading-[1.1] tracking-[-0.02em]">
+            Are you <span class="font-normal" style="color: #05E6DD">Overpaying</span> your<br>SMSF property loan?
+          </h1>
+          <p ref="supportCopy" class="smsf-sub text-base lg:text-lg font-light leading-[1.5]">Take our <span style="color: #05E6DD">SMSF Loan Health Check</span>.</p>
         </div>
 
-        <!-- Subheading + badge copy — styled container at half opacity -->
-        <div ref="badges" class="hidden lg:block sub-card lg:rounded-2xl lg:p-10">
-          <p class="smsf-sub text-xl font-light leading-[1.5]">5 quick questions to see if your loan is still competitive. Take 60 seconds to get instant results — no documents required.</p>
+        <!-- Sub-card: supporting prose -->
+        <div ref="badges" class="sub-card rounded-2xl p-6 lg:p-10">
+          <p class="smsf-sub text-base lg:text-xl font-light leading-[1.5]">5 quick questions to see if your loan is still competitive. Take 60 seconds to get instant results — no documents required.</p>
         </div>
 
         <!-- Quiz prompt -->
-        <p class="quiz-prompt hidden lg:flex items-center gap-2 text-sm font-medium">
+        <p class="quiz-prompt flex items-center gap-2 text-sm font-medium">
           Take the quiz now
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </p>
 
-        <!-- Loan form — flat on blue with hairline separator -->
-        <LoanCheck class="lg:border lg:border-white/20 lg:rounded-2xl lg:p-8" />
+        <!-- Loan form -->
+        <LoanCheck class="border border-white/20 rounded-2xl p-6 lg:p-8" />
 
         <!-- Trust signal -->
-        <p class="hidden lg:block text-xs text-white/40 text-center">Trusted by Australian SMSF Trustees · 4.8★ Google Reviews</p>
+        <p class="text-xs text-white/40 text-center">Trusted by Australian SMSF Trustees · 4.8★ Google Reviews</p>
 
-        <!-- Learn more CTA — sits outside card, against blue background -->
+        <!-- Learn more CTA -->
         <a href="#learn-more" class="learn-more-cta flex items-center justify-center gap-1.5 w-full text-sm font-medium transition-all rounded-full px-5 py-2.5 mt-3 lg:mt-auto">
           Learn more
           <svg xmlns="http://www.w3.org/2000/svg" class="learn-more-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -89,20 +69,12 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 
-const headline = ref<HTMLElement | null>(null)
 const desktopHeadline = ref<HTMLElement | null>(null)
 const supportCopy = ref<HTMLElement | null>(null)
 const badges = ref<HTMLElement | null>(null)
 
-const trustBadges = [
-  '60 seconds',
-  'Instant result',
-  'No documents required',
-]
-
 onMounted(() => {
   const targets = [
-    headline.value,
     desktopHeadline.value,
     supportCopy.value,
     badges.value,
@@ -119,28 +91,35 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Mobile: light grey panel */
+/* Right column — transparent so the hero blue gradient shows through on all sizes */
 .right-col {
-  background: linear-gradient(198deg, #FFF 28.98%, #D1D1D1 126.65%);
+  background: transparent;
 }
-.smsf-heading {
-  color: var(--color-royalblue-500);
+
+/* Glass cards — same on mobile and desktop */
+.right-card {
+  background: linear-gradient(198deg, rgba(61, 67, 82, 0.52) 0%, rgba(41, 46, 58, 0.52) 100%);
+  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
 }
+.sub-card {
+  background: linear-gradient(198deg, rgba(61, 67, 82, 0.26) 0%, rgba(41, 46, 58, 0.26) 100%);
+  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+}
+
 .smsf-sub {
-  color: var(--ui-text-toned);
+  color: rgba(255, 255, 255, 0.7);
 }
-.badge {
-  background:
-    linear-gradient(198deg, #FFF 28.98%, #D1D1D1 126.65%) padding-box,
-    linear-gradient(46deg, #0A2364, #023CB6) border-box;
-  border: 1px solid transparent;
-  color: var(--color-royalblue-500);
-}
+
+/* Teal CTA — same on mobile and desktop */
 .learn-more-cta {
-  color: var(--color-royalblue-500);
+  color: #292E3A;
+  background: #05E6DD;
 }
 .learn-more-cta:hover {
-  color: var(--color-royalblue-700, #0a2364);
+  color: #292E3A;
+  background: #04cfc7;
 }
 
 @keyframes nudge-right {
@@ -160,43 +139,5 @@ onMounted(() => {
 }
 .learn-more-icon {
   animation: bounce-down 1.6s ease-in-out infinite;
-}
-
-/* Desktop: blue gradient throughout, invert text to white */
-@media (min-width: 1024px) {
-  .right-col {
-    background: transparent;
-  }
-  .right-card {
-    background: linear-gradient(198deg, rgba(61, 67, 82, 0.52) 0%, rgba(41, 46, 58, 0.52) 100%);
-    box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(6px);
-  }
-  .sub-card {
-    background: linear-gradient(198deg, rgba(61, 67, 82, 0.26) 0%, rgba(41, 46, 58, 0.26) 100%);
-    box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(6px);
-  }
-  .smsf-heading {
-    color: white;
-  }
-  .smsf-sub {
-    color: rgba(255, 255, 255, 0.7);
-  }
-  .badge {
-    background:
-      linear-gradient(198deg, #FFF 28.98%, #D1D1D1 126.65%) padding-box,
-      linear-gradient(46deg, #0A2364, #023CB6) border-box;
-    border: 1px solid transparent;
-    color: var(--color-royalblue-500);
-  }
-  .learn-more-cta {
-    color: #292E3A;
-    background: #05E6DD;
-  }
-  .learn-more-cta:hover {
-    color: #292E3A;
-    background: #04cfc7;
-  }
 }
 </style>
