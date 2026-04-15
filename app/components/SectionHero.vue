@@ -17,6 +17,13 @@
         </video>
 
         <div class="absolute inset-0 z-10" style="background: linear-gradient(46deg, var(--color-brand-dblue, #292E3A) 8.32%, rgba(122, 136, 144, 0.00) 63.56%)" />
+
+        <!-- Mobile-only overlay headline — hidden on desktop -->
+        <div class="absolute bottom-3 left-3 right-3 z-20 rounded-xl p-6 lg:hidden" style="background: rgba(10, 35, 100, 0.22); box-shadow: 4px 4px 18px rgba(0,0,0,0.18); backdrop-filter: blur(2px);">
+          <h1 ref="headline" class="text-4xl font-extralight font-sans text-white leading-[1.1] tracking-[-0.02em]">
+            Are you<br><span class="font-normal" style="color: #05E6DD">Overpaying</span><br>your SMSF<br>property loan?
+          </h1>
+        </div>
       </div>
     </div>
 
@@ -26,7 +33,7 @@
 
         <!-- Glass card: headline + tagline -->
         <div ref="desktopHeadline" class="right-card flex flex-col gap-3 lg:gap-4 rounded-2xl p-6 lg:p-10">
-          <h1 class="text-3xl lg:text-4xl xl:text-5xl font-extralight font-sans text-white leading-[1.1] tracking-[-0.02em]">
+          <h1 class="hidden lg:block text-3xl lg:text-4xl xl:text-5xl font-extralight font-sans text-white leading-[1.1] tracking-[-0.02em]">
             Are you <span class="font-normal" style="color: #05E6DD">Overpaying</span> your<br>SMSF property loan?
           </h1>
           <p ref="supportCopy" class="smsf-sub text-base lg:text-lg font-light leading-[1.5]">Take our <span style="color: #05E6DD">SMSF Loan Health Check</span>.</p>
@@ -69,12 +76,14 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 
+const headline = ref<HTMLElement | null>(null)
 const desktopHeadline = ref<HTMLElement | null>(null)
 const supportCopy = ref<HTMLElement | null>(null)
 const badges = ref<HTMLElement | null>(null)
 
 onMounted(() => {
   const targets = [
+    headline.value,
     desktopHeadline.value,
     supportCopy.value,
     badges.value,
