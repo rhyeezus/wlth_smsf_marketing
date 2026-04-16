@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+  <div class="lg:flex-1 lg:flex lg:flex-col">
+    <div class="flex flex-col gap-3 lg:flex-1">
       <button
         v-for="opt in options"
         :key="opt.value"

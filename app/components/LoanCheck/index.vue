@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col lg:min-h-[28rem]">
+  <div class="flex flex-col">
 
     <!-- Step question heading — above the tracker -->
     <h3 v-if="isQuizStep" class="text-xl font-semibold text-white mb-3 font-sans">{{ stepHeading }}</h3>
@@ -16,11 +16,11 @@
     </div>
 
     <Transition name="step" mode="out-in">
-      <div :key="step">
+      <div :key="step" class="lg:flex-1 lg:flex lg:flex-col">
 
         <!-- Q1: SMSF Balance -->
-        <div v-if="step === 'q1'">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div v-if="step === 'q1'" class="lg:flex-1 lg:flex lg:flex-col">
+          <div class="flex flex-col gap-3 lg:flex-1">
             <button
               v-for="opt in q1Options"
               :key="opt"
@@ -33,8 +33,8 @@
         </div>
 
         <!-- Q2: Loan Amount -->
-        <div v-else-if="step === 'q2'">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div v-else-if="step === 'q2'" class="lg:flex-1 lg:flex lg:flex-col">
+          <div class="flex flex-col gap-3 lg:flex-1">
             <button
               v-for="opt in q2Options"
               :key="opt"
@@ -49,14 +49,15 @@
         <!-- Q3: Interest Rate -->
         <LoanCheckStepQ3
           v-else-if="step === 'q3'"
+          class="lg:flex-1 lg:flex lg:flex-col"
           :model-value="answers.q3"
           :option-class="optionClass"
           @select="(val) => selectAndAdvance('q3', val)"
         />
 
         <!-- Q4: Loan Type -->
-        <div v-else-if="step === 'q4'">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div v-else-if="step === 'q4'" class="lg:flex-1 lg:flex lg:flex-col">
+          <div class="flex flex-col gap-3 lg:flex-1">
             <button
               v-for="opt in q4Options"
               :key="opt"
@@ -69,8 +70,8 @@
         </div>
 
         <!-- Q5: Last Review -->
-        <div v-else-if="step === 'q5'">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div v-else-if="step === 'q5'" class="lg:flex-1 lg:flex lg:flex-col">
+          <div class="flex flex-col gap-3 lg:flex-1">
             <button
               v-for="opt in q5Options"
               :key="opt"
@@ -238,7 +239,7 @@ const q5Options = ['Within the last 12 months', '1–2 years ago', '3+ years ago
 
 // Button class helper — dark variant
 function optionClass(selected: boolean): string {
-  const base = 'w-full py-3.5 px-3 rounded-xl border-2 font-medium text-sm transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 cursor-pointer'
+  const base = 'w-full lg:flex-1 py-3.5 px-3 rounded-xl border-2 font-medium text-sm transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30 cursor-pointer'
   const selectedClass = 'border-royalblue-400 bg-royalblue-500/30 text-white'
   const unselectedClass = 'border-white/20 hover:border-white/40 text-white bg-white/8'
   return `${base} ${selected ? selectedClass : unselectedClass}`
