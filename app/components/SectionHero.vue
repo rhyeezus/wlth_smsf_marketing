@@ -6,7 +6,7 @@
     <div class="hidden lg:flex lg:col-span-12 lg:pt-6 lg:px-6 lg:pb-3">
       <div ref="desktopHeadline" class="copy-card rounded-2xl p-4 lg:p-5 w-full">
         <h1 class="text-3xl xl:text-4xl font-extralight font-sans text-white leading-[1.1] tracking-[-0.02em]">
-          Are you <span class="font-normal" style="color: #05E6DD">Overpaying</span> your SMSF property loan?
+          Are you <span class="font-normal" style="color: #05E6DD">overpaying</span> on your SMSF property loan?
         </h1>
       </div>
     </div>
@@ -36,29 +36,27 @@
         </div>
       </div>
 
-      <!-- Mobile copy card: "Find out" + chevrons -->
-      <div class="copy-card flex flex-col gap-3 rounded-2xl p-6 mt-3 lg:hidden">
-        <div class="grid grid-cols-3 items-center gap-3">
-          <p class="col-span-2 text-xl font-bold text-white leading-tight">
-            Find out, with our<br><span style="color: #05E6DD">SMSF health check</span>
-          </p>
-          <a href="#loan-form" class="flex flex-col items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-1 w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-2 w-7 h-7 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-3 w-7 h-7 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </a>
-        </div>
-      </div>
+      <!-- Mobile copy card: "Find out" + chevrons — full card is tappable -->
+      <a href="#loan-form" class="copy-card flex items-center justify-between rounded-2xl px-6 py-4 mt-3 lg:hidden">
+        <p class="text-xl font-bold text-white leading-tight">
+          Find out, with our<br><span style="color: #05E6DD">SMSF health check</span>
+        </p>
+        <span class="flex flex-col items-center justify-center shrink-0 ml-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-1 w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-2 w-7 h-7 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="chev chev-3 w-7 h-7 -mt-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </a>
     </div>
 
     <!-- Row 2 Right: Find out + bullets + form — col 8–12 on desktop -->
-    <div class="right-col min-h-[calc(100vh-4rem)] lg:min-h-0 lg:col-span-5 lg:row-start-2 lg:flex lg:flex-col">
+    <div class="right-col lg:min-h-0 lg:col-span-5 lg:row-start-2 lg:flex lg:flex-col">
       <div class="flex flex-col gap-3 px-3 pt-6 pb-6 lg:pt-0 lg:pb-6 lg:pr-6 lg:pl-3 lg:flex-1 lg:overflow-y-auto">
 
         <!-- "Find out" card — desktop only -->
@@ -79,7 +77,7 @@
         <div id="loan-form" class="mobile-snap-target lg:flex-1 lg:flex lg:flex-col">
 
           <!-- Mobile bullets — hidden on desktop -->
-          <div class="lg:hidden mb-3 flex flex-col gap-3 px-1">
+          <div class="lg:hidden mb-3 flex flex-col gap-3 px-3">
             <p class="text-sm font-medium text-white">Why it's worth 60 seconds</p>
             <div class="flex flex-col gap-2">
               <p class="flex items-center gap-2 text-xs text-white/75"><span style="color: #05E6DD;">✓</span> Free to check — no documents or paperwork required</p>
@@ -90,12 +88,12 @@
 
           <LoanCheck class="border border-white/20 rounded-2xl p-4 lg:p-5 lg:flex-1" />
 
-          <p class="text-xs text-white/40 text-center mt-3">Trusted by Australian SMSF Trustees · 4.8★ Google Reviews</p>
+          <p class="text-xs text-white/40 text-center mt-3">Built for Australian SMSF property investors</p>
 
         </div><!-- /loan-form -->
 
-        <!-- Learn more CTA — desktop only -->
-        <a href="#learn-more" class="learn-more-cta hidden lg:flex items-center justify-center gap-1.5 w-full text-sm font-medium transition-all rounded-full px-5 py-2.5 lg:mt-auto shrink-0">
+        <!-- Learn more CTA -->
+        <a href="#learn-more" class="learn-more-cta flex items-center justify-center gap-1.5 w-full text-sm font-medium transition-all rounded-full px-5 py-3 mt-3 lg:mt-auto shrink-0">
           Learn more
           <svg xmlns="http://www.w3.org/2000/svg" class="learn-more-icon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -135,7 +133,6 @@ onMounted(() => {
 <style scoped>
 @media (max-width: 1023px) {
   #loan-form {
-    min-height: calc(100vh - 4rem);
     scroll-margin-top: 4rem;
     padding-top: 1.5rem;
   }
@@ -168,6 +165,7 @@ onMounted(() => {
 .chev {
   color: rgba(5, 230, 221, 0.85);
   animation: chev-flow 2s ease-in-out infinite;
+  will-change: transform;
 }
 .chev-1 { animation-delay: 0s; }
 .chev-2 { animation-delay: 0.28s; }

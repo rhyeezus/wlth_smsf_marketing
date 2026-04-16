@@ -1,3 +1,7 @@
+:root {
+  --color-brand-dblue: #292E3A;
+}
+
 html {
   scroll-behavior: smooth;
 }

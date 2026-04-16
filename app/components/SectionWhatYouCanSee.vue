@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const sectionRef = ref<HTMLElement | null>(null)
 const videoRef = ref<HTMLVideoElement | null>(null)
+const { open: openModal } = useLoanModal()
+
+useVideoAutoplay(sectionRef, videoRef)
 
 const cards = [
   {
@@ -25,21 +27,7 @@ const cards = [
 ]
 
 onMounted(() => {
-  const videoObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          videoRef.value?.play()
-          videoObserver.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.1 },
-  )
-  if (sectionRef.value) videoObserver.observe(sectionRef.value)
-
   if (window.innerWidth < 1024) return
-  gsap.registerPlugin(ScrollTrigger)
   gsap.from(sectionRef.value!.querySelectorAll('.animate-in'), {
     opacity: 0,
     y: 20,
@@ -53,24 +41,11 @@ onMounted(() => {
 
 <template>
   <section ref="sectionRef" style="background: linear-gradient(176deg, #023CB6 6.13%, #0A2364 112.2%);">
-    <div class="max-w-5xl mx-auto px-3 pt-6 pb-12 lg:px-6 lg:py-8 lg:grid lg:grid-cols-12 lg:grid-rows-[220px_220px_auto] lg:gap-4">
+    <div class="max-w-5xl mx-auto px-3 pt-6 pb-8 lg:px-6 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-6 lg:min-h-[55vh]">
 
-      <!-- Feature cards sub-grid — 2×2 on desktop, stacked on mobile -->
-      <div class="flex flex-col gap-3 mb-4 lg:mb-0 lg:col-span-8 lg:row-span-2 lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:gap-4">
-        <div
-          v-for="card in cards"
-          :key="card.title"
-          class="animate-in card rounded-2xl p-5 text-white"
-          style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);"
-        >
-          <p class="font-medium text-sm mb-1">{{ card.title }}</p>
-          <p class="text-sm text-white/70 leading-relaxed">{{ card.body }}</p>
-        </div>
-      </div>
-
-      <!-- Video card — narrow portrait sidebar on desktop -->
-      <div class="animate-in relative rounded-2xl overflow-hidden shadow-xl h-[260px] lg:h-auto mb-4 lg:mb-0 lg:col-span-4 lg:row-span-2">
-        <video ref="videoRef" muted loop playsinline preload="none" poster="/video/section-desk-poster.jpg"
+      <!-- Video — mobile first, desktop left (col 1–7, full height) -->
+      <div class="animate-in relative rounded-2xl overflow-hidden shadow-xl h-[260px] lg:h-auto mb-4 lg:mb-0 lg:col-start-1 lg:col-span-7 lg:row-start-1">
+        <video ref="videoRef" aria-hidden="true" muted loop playsinline preload="none" poster="/video/section-desk-poster.jpg"
           class="absolute inset-0 w-full h-full object-cover">
           <source src="/video/section-desk.webm" type="video/webm">
           <source src="/video/section-desk.mp4" type="video/mp4">
@@ -83,18 +58,25 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- CTA card — full width bottom row -->
-      <div class="animate-in rounded-2xl p-5 text-white lg:col-span-12" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <p class="text-xs text-white/50">Trusted by Australian SMSF Trustees · 4.8★ Google Reviews</p>
-          <a
-            href="#hero"
-            class="inline-flex w-full sm:w-auto justify-center items-center rounded-full px-6 py-3.5 text-sm font-medium transition-all shrink-0"
-            style="background: #05E6DD; color: #292E3A;"
-          >
-            Start My 60-Second Check →
-          </a>
+      <!-- Right column: stacked feature cards + CTA button -->
+      <div class="animate-in flex flex-col gap-3 lg:col-start-8 lg:col-span-5 lg:row-start-1">
+        <div
+          v-for="card in cards"
+          :key="card.title"
+          class="rounded-2xl p-3 lg:p-4 text-white"
+          style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);"
+        >
+          <p class="font-medium text-sm mb-1">{{ card.title }}</p>
+          <p class="text-sm text-white/70 leading-relaxed">{{ card.body }}</p>
         </div>
+
+        <button
+          class="inline-flex w-full justify-center items-center rounded-full px-6 py-3.5 text-sm font-medium transition-all mt-auto cursor-pointer"
+          style="background: #05E6DD; color: #292E3A;"
+          @click="openModal"
+        >
+          Start My 60-Second Check →
+        </button>
       </div>
 
     </div>

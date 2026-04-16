@@ -7,26 +7,15 @@ const sectionRef = ref<HTMLElement | null>(null)
 const videoRef = ref<HTMLVideoElement | null>(null)
 const counterVal = ref(0)
 const counterTriggered = ref(false)
+const { open: openModal } = useLoanModal()
+
+useVideoAutoplay(sectionRef, videoRef)
 
 const counterDisplay = computed(() =>
   '$' + counterVal.value.toLocaleString('en-AU')
 )
 
 onMounted(() => {
-  const videoObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          videoRef.value?.play()
-          videoObserver.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.1 },
-  )
-  if (sectionRef.value) videoObserver.observe(sectionRef.value)
-
-  // Counter — fires once when section enters view
   const counterObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -48,7 +37,6 @@ onMounted(() => {
   if (sectionRef.value) counterObserver.observe(sectionRef.value)
 
   if (window.innerWidth < 1024) return
-  gsap.registerPlugin(ScrollTrigger)
   gsap.from(sectionRef.value!.querySelectorAll('.animate-in'), {
     opacity: 0,
     y: 20,
@@ -62,11 +50,11 @@ onMounted(() => {
 
 <template>
   <section id="learn-more" ref="sectionRef" class="bg-white scroll-mt-16">
-    <div class="max-w-5xl mx-auto px-3 pt-6 pb-12 lg:px-6 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-6 lg:min-h-[55vh]">
+    <div class="max-w-5xl mx-auto px-3 pt-6 pb-8 lg:px-6 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-6 lg:min-h-[55vh]">
 
       <!-- Video — mobile first, desktop left (col 1–7, full height) -->
       <div class="animate-in relative rounded-2xl overflow-hidden shadow-xl h-[260px] lg:h-auto mb-4 lg:mb-0 lg:col-start-1 lg:col-span-7 lg:row-start-1">
-        <video ref="videoRef" muted loop playsinline preload="none" poster="/video/section-pool-poster.jpg"
+        <video ref="videoRef" aria-hidden="true" muted loop playsinline preload="none" poster="/video/section-pool-poster.jpg"
           class="absolute inset-0 w-full h-full object-cover">
           <source src="/video/section-pool.webm" type="video/webm">
           <source src="/video/section-pool.mp4" type="video/mp4">
@@ -86,22 +74,22 @@ onMounted(() => {
         </p>
 
         <!-- Savings counter callout -->
-        <div class="flex-1 flex flex-col justify-center rounded-xl px-5 py-6 mb-5" style="background: #EEF3FF; border: 1px solid #D6E2FF;">
-          <p class="text-sm text-lightgrey-500 mb-1">Potential annual saving</p>
-          <p class="text-6xl font-bold tracking-tight leading-none mb-2" style="color: #023CB6;">{{ counterDisplay }}</p>
-          <p class="text-xs text-lightgrey-400">Based on a 0.5% rate reduction on a $500k loan</p>
+        <div class="flex-1 flex flex-col justify-center rounded-xl px-5 py-6 mb-5" style="background: linear-gradient(135deg, #f7f8f8 0%, #eceff0 100%);">
+          <p class="text-sm font-medium text-lightgrey-700 mb-1">Potential annual saving</p>
+          <p class="text-5xl lg:text-6xl font-bold tracking-tight leading-none mb-2" style="color: #023CB6;">{{ counterDisplay }}</p>
+          <p class="text-sm font-medium text-lightgrey-700">Based on a 0.5% rate reduction on a $500k loan</p>
         </div>
 
         <p class="text-base text-lightgrey-900 leading-relaxed">
           This does not mean there is anything wrong with your loan. It simply means it may be worth checking where things currently stand.
         </p>
-        <a
-          href="#hero"
-          class="inline-flex w-full justify-center items-center rounded-full px-6 py-3.5 text-sm font-medium transition-all mt-6"
+        <button
+          class="inline-flex w-full justify-center items-center rounded-full px-6 py-3.5 text-sm font-medium transition-all mt-6 cursor-pointer"
           style="background: #05E6DD; color: #292E3A;"
+          @click="openModal"
         >
           Check My Loan Now →
-        </a>
+        </button>
       </div>
 
     </div>

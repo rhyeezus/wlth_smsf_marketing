@@ -6,6 +6,6 @@
       <slot />
     </main>
     <AppFooter />
-    <StickyCheckCta />
+    <LoanModal />
   </div>
 </template>
