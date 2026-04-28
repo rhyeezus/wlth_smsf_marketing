@@ -261,7 +261,7 @@ const stepNumber = computed(() => stepNumberMap[step.value] ?? 0)
 const q1Options = ['$200k – $400k', '$400k – $700k', '$700k – $1M', '$1M+']
 const q2Options = ['Under $300k', '$300k – $500k', '$500k – $800k', '$800k+']
 const q4Options = ['Variable', 'Fixed', 'Not sure']
-const q5Options = ['Within the last 12 months', '1–2 years ago', '3+ years ago', 'Never reviewed']
+const q5Options = ['Within the last 12 months', '1-2 years ago', '3+ years ago', 'Never reviewed']
 
 // Button class helper — dark variant
 function optionClass(selected: boolean): string {
