@@ -66,7 +66,7 @@
               <li><a href="https://www.wlth.com/credit-guide/" target="_blank" rel="noopener noreferrer" class="text-sm text-lightgrey-400 hover:text-white transition-colors">Credit Guide</a></li>
               <li><a href="https://www.wlth.com/support/" target="_blank" rel="noopener noreferrer" class="text-sm text-lightgrey-400 hover:text-white transition-colors">Support</a></li>
               <li><a href="https://www.legislation.gov.au/Details/C2020C00215" target="_blank" rel="noopener noreferrer" class="text-sm text-lightgrey-400 hover:text-white transition-colors">NCCP Act</a></li>
-              <li><a href="#" class="text-sm text-lightgrey-400 hover:text-white transition-colors">Key Facts Sheet</a></li>
+              <li><a href="https://www.wlth.com/homeloan/key-facts-sheet/" target="_blank" rel="noopener noreferrer" class="text-sm text-lightgrey-400 hover:text-white transition-colors">Key Facts Sheet</a></li>
             </ul>
           </div>
 
