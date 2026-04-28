@@ -311,7 +311,7 @@ const score = computed<number>(() => {
   else if (answers.q3 === '7-plus') s += 30
   if (answers.q5 === 'Never reviewed') s += 20
   else if (answers.q5 === '3+ years ago') s += 15
-  else if (answers.q5 === '1–2 years ago') s += 5
+  else if (answers.q5 === '1-2 years ago') s += 5
   if (answers.q4 === 'Fixed') s += 5
   return Math.min(100, Math.max(0, s))
 })
