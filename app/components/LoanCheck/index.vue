@@ -349,7 +349,7 @@ async function submitLead() {
     { name: 'email', value: answers.email },
     { name: 'mobilephone', value: answers.phone },
     { name: 'current_smsf_balance', value: answers.q1 },
-    { name: 'current_smsf_balance', value: answers.q2 },
+    { name: 'current_loan_balance_for_refinance', value: answers.q2 },
     { name: 'interest_rate___joust', value: answers.q3 },
     { name: 'current_loan_rate_structure__typeform', value: answers.q4 },
     { name: 'last_loan_review__typeform', value: answers.q5 },
