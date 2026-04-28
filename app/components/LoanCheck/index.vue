@@ -337,7 +337,7 @@ const scoreLabelColor = computed<string>(() => {
 // HubSpot Forms v3 — set NUXT_PUBLIC_HUBSPOT_PORTAL_ID in .env
 const runtimeConfig = useRuntimeConfig()
 const HUBSPOT_PORTAL_ID = runtimeConfig.public.hubspotPortalId
-const HUBSPOT_FORM_GUID = 'f9d08ba6-c47e-4909-9b1e-bc4d461fda9c'
+const HUBSPOT_FORM_GUID = 'c193317f-33df-4006-b53e-cf333ea05351'
 
 // Lead submission — posts to HubSpot Forms API then advances to result
 async function submitLead() {
