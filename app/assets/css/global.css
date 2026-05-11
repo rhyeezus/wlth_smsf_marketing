@@ -1,5 +1,74 @@
+@import "tailwindcss" theme(static);
+@import "@nuxt/ui";
+
 :root {
   --color-brand-dblue: #292E3A;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src:
+    url("https://assets.wlth.com/fonts/SuisseIntl-Book.woff2") format("woff2"),
+    url("https://assets.wlth.com/fonts/SuisseIntl-Book.woff") format("woff");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src:
+    url("https://assets.wlth.com/fonts/SuisseIntl-Regular.woff2") format("woff2"),
+    url("https://assets.wlth.com/fonts/SuisseIntl-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src:
+    url("https://assets.wlth.com/fonts/SuisseIntl-Medium.woff2") format("woff2"),
+    url("https://assets.wlth.com/fonts/SuisseIntl-Medium.woff") format("woff");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src:
+    url("https://assets.wlth.com/fonts/SuisseIntl-SemiBold.woff2") format("woff2"),
+    url("https://assets.wlth.com/fonts/SuisseIntl-SemiBold.woff") format("woff");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src:
+    url("https://assets.wlth.com/fonts/SuisseIntl-Bold.woff2") format("woff2"),
+    url("https://assets.wlth.com/fonts/SuisseIntl-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@theme static {
+  --font-sans: "SuisseIntl", system-ui, -apple-system, sans-serif;
+
+  --color-royalblue-400: #4e78e3;
+  --color-royalblue-500: #1445c7;
+
+  --color-darkblue-500: #292e3a;
+
+  --color-lightgrey-100: #f7f8f8;
+  --color-lightgrey-300: #eceff0;
+  --color-lightgrey-400: #dde2e3;
+  --color-lightgrey-600: #b8c5ca;
+  --color-lightgrey-700: #8d9aa1;
+  --color-lightgrey-900: #4c5a68;
 }
 
 html {
